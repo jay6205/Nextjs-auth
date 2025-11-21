@@ -8,6 +8,7 @@ import toast from "react-hot-toast"
 import { useEffect, useState } from "react"
 
 interface UserProfile {
+  username?: string
   name: string
   email: string
 }
@@ -28,7 +29,7 @@ export default function ProfilePage() {
     }
   }
 
-  const [data, setdata] = useState(null)
+  const [data, setdata] = useState<UserProfile | null>(null)
   const getUserDetails = async () => {
     const res = await axios.get('/api/users/me')
     setdata(res.data.data)
@@ -53,13 +54,13 @@ export default function ProfilePage() {
             {/* Username */}
             <div>
               <p className="text-sm text-muted-foreground mb-2">Username</p>
-              <p className="text-lg font-semibold text-foreground">{data?data.username:profile.name}</p>
+              <p className="text-lg font-semibold text-foreground">{data  ? data.username : profile.name}</p>
             </div>
 
             {/* Email */}
             <div>
               <p className="text-sm text-muted-foreground mb-2">Email</p>
-              <p className="text-lg font-semibold text-foreground break-all">{data?data.email:profile.email}</p>
+              <p className="text-lg font-semibold text-foreground break-all">{data ? data.email : profile.email}</p>
             </div>
 
             {/* Sign Out Button */}
